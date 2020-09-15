@@ -44,6 +44,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnStringReplace = new System.Windows.Forms.Button();
             this.cbApplyDir = new System.Windows.Forms.CheckBox();
+            this.btnListJson = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtFolder
@@ -188,11 +189,23 @@
             this.cbApplyDir.Text = "Apply to Directory";
             this.cbApplyDir.UseVisualStyleBackColor = true;
             // 
+            // btnListJson
+            // 
+            this.btnListJson.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnListJson.Location = new System.Drawing.Point(435, 354);
+            this.btnListJson.Name = "btnListJson";
+            this.btnListJson.Size = new System.Drawing.Size(203, 72);
+            this.btnListJson.TabIndex = 16;
+            this.btnListJson.Text = "List JSON";
+            this.btnListJson.UseVisualStyleBackColor = true;
+            this.btnListJson.Click += new System.EventHandler(this.btnListJson_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 463);
+            this.Controls.Add(this.btnListJson);
             this.Controls.Add(this.cbApplyDir);
             this.Controls.Add(this.btnStringReplace);
             this.Controls.Add(this.txtStringNew);
@@ -235,6 +248,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnStringReplace;
         private System.Windows.Forms.CheckBox cbApplyDir;
+        private System.Windows.Forms.Button btnListJson;
     }
 }
 

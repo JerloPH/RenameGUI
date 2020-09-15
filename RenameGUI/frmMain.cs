@@ -532,5 +532,59 @@ namespace RenameGUI
             tool.SetToolTip(btnStringReplace, "Replace all occurence of string with another string");
             tool.SetToolTip(cbApplyDir, "Checked: Apply to folders inside the source folder\nUnchecked: Apply to Files inside the source folder");
         }
+
+        private void btnListJson_Click(object sender, EventArgs e)
+        {
+            // List to JSON file
+            string errFrom = "btnListJson_Click";
+            string folder = txtFolder.Text;
+            string format = "";
+            string chapter = "", chapterName = "";
+            string logJson = "JSONLog.log";
+
+            List<string> list = ListToGet(folder, errFrom);
+            
+            if (list.Count > 0)
+            {
+                list.Sort((a, b) => b.CompareTo(a)); // descending sort
+
+                foreach (string folderName in list)
+                {
+                    try
+                    {
+                        chapterName = Path.GetFileName(folderName);
+                        chapter = GetFromTil(chapterName, ".", "_").TrimStart('.');
+                        chapter = chapter.TrimStart('0').TrimEnd('_');
+
+                        if (String.IsNullOrWhiteSpace(chapter) == false)
+                        {
+                            format = "{\n\t\"chap\": \"" + chapter + "\",\n\t";
+                            format += "\"page\":\n\t[\n\t\t";
+                            format += "{\"id\":\"0\", \"str\":\"";
+
+                            // add formatted chapter name
+                            int start = chapterName.IndexOf("_");
+                            int len = chapterName.Length - start;
+                            string chapterNameFormatted = chapterName.Substring(start, len).ToLower();
+                            chapterNameFormatted = chapterNameFormatted.Replace("(", String.Empty).Replace(")", String.Empty);
+                            chapterNameFormatted = chapterNameFormatted.TrimStart('_').Trim();
+
+                            format += chapterNameFormatted;
+                            format += "\"}\n\t]\n},\n";
+                            LogFile(format, "JSON.txt");
+                            LogFile(chapterNameFormatted + "\n", logJson);
+                        }
+
+                    } catch (Exception ex)
+                    {
+                        // Error
+                        string log = "\nDirectory: " + folderName + "\nError: " + ex.ToString() + "\n";
+                        LogFile(log, "JSONError.txt");
+                    }
+                }
+
+                Msg("Done!");
+            }
+        }
     }
 }
