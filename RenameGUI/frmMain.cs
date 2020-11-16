@@ -579,7 +579,7 @@ namespace RenameGUI
                     {
                         // Error
                         string log = "\nDirectory: " + folderName + "\nError: " + ex.ToString() + "\n";
-                        LogFile(log, "JSONError.txt");
+                        LogFile(log, "JSONError.log");
                     }
                 }
 
